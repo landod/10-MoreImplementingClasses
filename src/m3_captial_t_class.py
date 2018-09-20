@@ -176,8 +176,8 @@ class CapitalT(object):
 
         r1 = self.h_rect
         r2 = self.v_rect
-        r1.attach_to(window)
         r2.attach_to(window)
+        r1.attach_to(window)
 
     def set_colors(self, fill_color, outline_color):
         """
@@ -284,12 +284,25 @@ class CapitalT(object):
           :rtype: CapitalT
         """
         # --------------------------------------------------------------
-        # TODO: 7.
+        # DONE: 7.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
         #     clone.pdf.
         # -------------------------------------------------------------
+        r1 = self.h_rect
+        r2 = self.v_rect
+        p1 = r1.get_upper_left_corner()
+        p2 = r1.get_lower_right_corner()
+        p3 = r2.get_lower_right_corner()
+        inter = rg.Point((p2.x - p1.x), (p2.y - p1.y))
+        width = p2.x - p1.x
+        thick = p2.y - p1.y
+        height = p3.y - p1.y
+        CT = CapitalT(inter, width, height, thick)
+        CT.set_colors(r1.fill_color, r1.outline_color)
+        return CT
+
 # ----------------------------------------------------------------------
 # If this module is running at the top level (as opposed to being
 # imported by another module), then call the 'main' function.
